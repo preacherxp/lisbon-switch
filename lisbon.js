@@ -49,7 +49,8 @@
 
   const scene = {
     city: 'Lisbon',
-    label: 'Dark mode',
+    label: 'Lisbon day and night',
+    checks: { signs: { PENSAO: 'the covered pixels are its own hand-drawn tilde, which makes PENSÃO' } },
     tube: ['#ffc61a', '#1f7dff'],
     body: ['#efe6d4', '#0c1120'],
     glass: 'clear',
@@ -534,13 +535,13 @@
       // A shop under a tile porch
       const sx0 = 60;
       w.rect(sx0, 112, 38, FG(sx0 + 38) - 112 + 2, M.LIME);
-      w.hsign(sx0 + 1, 112, 37, 8, 'CONSERVAS', { n: N.B_WHITE, g: sign(), board: M.AZ_B, mode: 'tube', off: M.AZ_W });
+      door(sx0 + 30, FG(sx0 + 30), 5, 6);
+      w.hsign(sx0 + 1, 113, 37, 7, 'CONSERVAS', { n: N.B_WHITE, g: sign(), board: M.AZ_B, mode: 'tube', off: M.AZ_W });
       w.rect(sx0 + 2, 120, 23, 5, M.GLASS_DK);
       w.lightRect(sx0 + 2, 120, 23, 5, N.WARM, shop);
       const tins = [M.BUNT_R, M.BUNT_Y, M.BUNT_B, M.BUNT_G, M.AZ_W];
       for (let i = 0; i < 11; i++) w.rect(sx0 + 3 + i * 2, 122, 1, 2, tins[i % 5]);
       for (let i = 0; i < 7; i++) w.px(sx0 + 4 + i * 3, 120, tins[(i + 2) % 5]);
-      door(sx0 + 30, FG(sx0 + 30), 5, 8);
       roof(sx0 - 1, 112, 40, 3);
       w.cat.x = 72;
       w.cat.y = 108;
@@ -662,9 +663,9 @@
 
       // FARMÁCIA with its cross
       const fg = sign();
-      w.hsign(u1, B1 - 19, 35, 10, 'FARMACIA', { n: N.GREEN, g: fg, board: M.BOARD_K });
-      accent(u1, B1 - 19, 35, 10, 'FARMACIA', 4, 3, ['.##'], N.GREEN, fg);
-      w.cross = { x: u2 - 10, y: B1 - 31, g: w.addGroup(18.7, 40) };
+      w.hsign(u1, B1 - 19, 35, 9, 'FARMACIA', { n: N.GREEN, g: fg, board: M.BOARD_K });
+      accent(u1, B1 - 19, 35, 9, 'FARMACIA', 4, 3, ['.##'], N.GREEN, fg);
+      w.cross = { x: u2 - 10, y: B1 - 31, g: w.addGroup(18.7, 32) };
       w.rect(u2 - 11, B1 - 32, 11, 11, M.BOARD_K);
       for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) if ((i > 2 && i < 6) || (j > 2 && j < 6)) w.tube(w.cross.x + i, w.cross.y + j, M.BOARD_G, N.B_GREEN, w.cross.g);
@@ -678,17 +679,17 @@
 
       // PASTELARIA, trays in the window
       const pg = sign();
-      w.hsign(u2 + 1, B2 - 19, 41, 10, 'PASTELARIA', { n: N.B_WHITE, g: pg, board: M.BOARD_W, mode: 'lit' });
+      w.hsign(u2 + 1, B2 - 19, 41, 9, 'PASTELARIA', { n: N.B_WHITE, g: pg, board: M.BOARD_W, mode: 'lit' });
       w.rect(u2 + 2, B2 - 9, 26, 8, M.GLASS_DK);
       w.lightRect(u2 + 2, B2 - 9, 26, 8, N.WARM, shop);
       w.rect(u2 + 2, B2 - 5, 26, 1, M.STONE);
       for (let i = 0; i < 12; i++) w.px(u2 + 3 + i * 2, B2 - 6, i % 2 ? M.OCRE : M.TER);
       door(u2 + 33, B2 - 1, 5, 8);
 
-      w.hsign(u2 + 2, B2 + 1, 19, 8, 'BICA', { n: N.YELLOW, g: sign(), board: M.BOARD_K });
+      w.hsign(u2 + 2, B2 + 1, 19, 7, 'BICA', { n: N.YELLOW, g: sign(), board: M.BOARD_K });
 
       // TASCA, red
-      w.hsign(u3 + 1, B3 - 21, 30, 11, 'TASCA', { n: N.RED, g: sign(), board: M.BOARD_K, font: 5 });
+      w.hsign(u3, B3 - 19, 30, 9, 'TASCA', { n: N.RED, g: sign(), board: M.BOARD_K, font: 5 });
       w.rect(u3 + 3, B3 - 9, 12, 8, M.GLASS_DK);
       w.lightRect(u3 + 3, B3 - 9, 12, 8, N.WARM, w.myWin[3]);
       door(u3 + 20, B3 - 1, 5, 8);
@@ -746,9 +747,9 @@
         for (let i = 0; i < row.length; i++) if (row[i] === '#') w.tube(fx + i, 89 + j, M.TUBE, i > 26 ? N.YELLOW : N.ORANGE, guitarBody);
       });
       for (let i = 2; i < 27; i++) if (i < 4 || i > 8) w.tube(fx + i, 94, M.TUBE, N.WHITE, guitarStrings);
+      w.rect(fx + 2, 110, 20, fb - 110 - 3, M.WOOD_DK);
       w.hsign(fx + 5, 100, 23, 11, 'FADO', { n: N.ORANGE, g: sign(), board: M.BOARD_K, font: 5 });
       w.fado = { x: fx + 3, y: 111, w: 18, h: fb - 111 - 4, g: fadoRoom };
-      w.rect(fx + 2, 110, 20, fb - 110 - 3, M.WOOD_DK);
       w.rect(fx + 3, 111, 18, fb - 111 - 4, M.GLASS_DK);
       w.lightRect(fx + 3, 111, 18, fb - 111 - 4, N.FADO_ROOM, fadoRoom);
       w.rect(fx + 25, 112, 6, fb - 112, M.WOOD_DK);
@@ -773,11 +774,11 @@
       door(cerx + 34, FG(cerx + 34), 6, 10);
 
       // HOTEL on its bracket, out over the view
-      w.rect(195, 63, 10, 1, M.IRON);
-      w.vsign(195, 64, 'HOTEL', { n: N.PINK, g: sign(), board: M.BOARD_K, w: 9, font: 5 });
+      w.rect(196, 76, 9, 1, M.IRON);
+      w.vsign(196, 77, 'HOTEL', { n: N.PINK, g: sign(), board: M.BOARD_K, w: 8, font: 3 });
 
       // ---- The gap: parapet of the miradouro
-      for (let x = 112; x < 205; x++) {
+      for (let x = 112; x < 199; x++) {
         for (let y = WATER_END; y < 128; y++) w.px(x, y, y === WATER_END ? M.STONE : M.STONE_D);
         for (let i = 0; i < 4; i++) {
           const y = WATER_END + 2 + i;
